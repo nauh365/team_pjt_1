@@ -26,4 +26,9 @@ public class QuestionService {
     public Optional<Question> findQuestionById(Long id) {
         return questionRepository.findById(id);
     }
+
+    public Question createQuestion(Question question) {
+        return questionRepository.save(question);
+    }
+
 }
