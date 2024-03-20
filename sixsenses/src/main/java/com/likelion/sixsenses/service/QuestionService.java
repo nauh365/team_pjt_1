@@ -4,6 +4,7 @@ import com.likelion.sixsenses.entity.Question;
 import com.likelion.sixsenses.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +22,7 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
+    @Transactional
     public Optional<Question> findQuestionById(Long id) {
         return questionRepository.findById(id);
     }

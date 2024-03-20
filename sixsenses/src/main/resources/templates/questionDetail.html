@@ -10,6 +10,14 @@
 <p><strong>작성자 ID:</strong> <span th:text="${question.authorId}">작성자 ID</span></p>
 <p><strong>답변 상태:</strong> <span th:text="${question.answerStatus}">답변 상태</span></p>
 <p><strong>작성 시간:</strong> <span th:text="${question.createdAt}">작성 시간</span></p>
+
+<h2>답변 목록</h2>
+<div th:each="answer : ${question.answer}">
+    <p><strong>내용:</strong> <span th:text="${answer.content}">답변 내용</span></p>
+    <p><strong>작성자 ID:</strong> <span th:text="${answer.authorId}">작성자 ID</span></p>
+    <p><strong>작성 시간:</strong> <span th:text="${answer.createdAt}">작성 시간</span></p>
+</div>
+
 <a href="/GET/question">목록으로 돌아가기</a>
 </body>
 </html>
