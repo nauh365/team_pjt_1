@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 상세</title>
+</head>
+<body>
+<h1 th:text="${question.title}">게시글 제목</h1>
+<p><strong>내용:</strong> <span th:text="${question.content}">게시글 내용</span></p>
+<p><strong>작성자 ID:</strong> <span th:text="${question.authorId}">작성자 ID</span></p>
+<p><strong>답변 상태:</strong> <span th:text="${question.answerStatus}">답변 상태</span></p>
+<p><strong>작성 시간:</strong> <span th:text="${question.createdAt}">작성 시간</span></p>
+<a href="/GET/question">목록으로 돌아가기</a>
+</body>
+</html>
