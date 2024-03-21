@@ -34,6 +34,8 @@ public class AnswerService {
                 .createdAt(LocalDateTime.now()) // 혹시 @PrePersist가 작동하지 않을 경우를 대비해 명시적으로 설정
                 .build();
         answerRepository.save(answer);
+        question.setAnswerStatus("답변완료");
+        questionRepository.save(question);
     }
 
 }
