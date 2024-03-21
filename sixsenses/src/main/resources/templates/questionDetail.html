@@ -3,6 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글 상세</title>
+    <script>
+        function toggleEditForm(answerId) {
+            var form = document.getElementById('editForm-' + answerId);
+            var content = document.getElementById('content-' + answerId);
+            var editButton = document.getElementById('editButton-' + answerId);
+
+            if (form.style.display === 'none') {
+                form.style.display = 'block'; // 수정 폼을 보여줍니다.
+                content.style.display = 'none'; // 원래의 답변 내용을 숨깁니다.
+                editButton.style.display = 'none'; // 수정 버튼을 숨깁니다.
+            } else {
+                form.style.display = 'none'; // 수정 폼을 숨깁니다.
+            }
+        }
+
+        // 수정 완료 처리
+        function showEditButtonAndContent(answerId) {
+            var form = document.getElementById('editForm-' + answerId);
+            var content = document.getElementById('content-' + answerId);
+            var editButton = document.getElementById('editButton-' + answerId);
+
+            form.style.display = 'none'; // 수정 폼을 숨깁니다.
+            content.style.display = 'block'; // 수정된 답변 내용을 다시 보여줍니다.
+            editButton.style.display = 'inline'; // 수정 버튼을 다시 보여줍니다.
+        }
+
+    </script>
 </head>
 <body>
 <h1 th:text="${question.title}">게시글 제목</h1>
@@ -13,14 +40,32 @@
 
 <h2>답변 목록</h2>
 <div th:each="answer : ${question.answer}">
-    <p><strong>내용:</strong> <span th:text="${answer.content}">답변 내용</span></p>
+    <!--<p><strong>내용:</strong> <span th:text="${answer.content}">답변 내용</span></p>-->
+    <p><strong>내용:</strong> <span th:id="'content-' + ${answer.id}" th:text="${answer.content}">답변 내용</span></p>
+    <!-- 숨겨진 수정 폼 -->
+    <div th:id="'editForm-' + ${answer.id}" style="display:none">
+        <form th:action="@{/POST/answer/{answerId}/update(answerId=${answer.id})}" method="post"
+              onsubmit="showEditButtonAndContent([[${answer.id}]]); return false;">
+            <input type="hidden" name="questionId" th:value="${question.id}" />
+            <textarea name="content" required th:text="${answer.content}"></textarea><br>
+            <button type="submit">수정 완료</button>
+        </form>
+    </div>
+
     <p><strong>작성자 ID:</strong> <span th:text="${answer.authorId}">작성자 ID</span></p>
     <p><strong>작성 시간:</strong> <span th:text="${answer.createdAt}">작성 시간</span>
+
+    <!-- 답변 수정 버튼 -->
+    <button th:id="'editButton-' + ${answer.id}" th:attr="onclick='toggleEditForm(' + ${answer.id} + ');'" style="display:inline">답변 수정</button>
+
+
     <form th:action="@{/POST/answer/{answerId}/delete(answerId=${answer.id})}" method="post">
         <input type="submit" value="답변삭제">
         <input type="hidden" name="questionId" th:value="${question.id}" />
     </form>
 </div>
+
+
 
 <form action="/POST/answer/new" method="POST">
     <div>
