@@ -15,7 +15,11 @@
 <div th:each="answer : ${question.answer}">
     <p><strong>내용:</strong> <span th:text="${answer.content}">답변 내용</span></p>
     <p><strong>작성자 ID:</strong> <span th:text="${answer.authorId}">작성자 ID</span></p>
-    <p><strong>작성 시간:</strong> <span th:text="${answer.createdAt}">작성 시간</span></p>
+    <p><strong>작성 시간:</strong> <span th:text="${answer.createdAt}">작성 시간</span>
+    <form th:action="@{/POST/answer/{answerId}/delete(answerId=${answer.id})}" method="post">
+        <input type="submit" value="답변삭제">
+        <input type="hidden" name="questionId" th:value="${question.id}" />
+    </form>
 </div>
 
 <form action="/POST/answer/new" method="POST">
@@ -34,6 +38,8 @@
         <button type="submit">답변 등록</button>
     </div>
 </form>
+
+
 <a th:href="@{/GET/question/{id}/update(id=${question.id})}">질문 수정</a>
 <form th:action="@{/POST/question/{id}/delete(id=${question.id})}" method="post">
     <input type="submit" value="질문 삭제">

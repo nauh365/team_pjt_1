@@ -38,4 +38,16 @@ public class AnswerService {
         questionRepository.save(question);
     }
 
+    public void deleteAnswer(
+            Long questionId,
+            Long answerId
+    ) {
+        Question question = questionRepository.findById(questionId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid question Id:" + questionId));
+        answerRepository.deleteById(answerId);
+        question.setAnswerStatus("미답변");
+        questionRepository.save(question);
+    }
+
+
 }
