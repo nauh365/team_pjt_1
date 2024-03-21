@@ -34,6 +34,10 @@
         <button type="submit">답변 등록</button>
     </div>
 </form>
+<a th:href="@{/GET/question/{id}/update(id=${question.id})}">질문 수정</a>
+<form th:action="@{/POST/question/{id}/delete(id=${question.id})}" method="post">
+    <input type="submit" value="질문 삭제">
+</form>
 
 <a href="/GET/question">목록으로 돌아가기</a>
 </body>

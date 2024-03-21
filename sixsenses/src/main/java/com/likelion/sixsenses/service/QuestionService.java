@@ -31,4 +31,22 @@ public class QuestionService {
         return questionRepository.save(question);
     }
 
+    public Question updateQuestion(
+            Long id,
+            Question updatedQuestion) {
+        return questionRepository.findById(id)
+                .map(question -> {
+                    question.setTitle(updatedQuestion.getTitle());
+                    question.setContent(updatedQuestion.getContent());
+                    return questionRepository.save(question);
+                })
+                //TODO
+                .orElseThrow(() -> new IllegalArgumentException("In"));
+    }
+
+    public void deleteQuestion(Long id) {
+        questionRepository.deleteById(id);
+    }
+
+
 }
