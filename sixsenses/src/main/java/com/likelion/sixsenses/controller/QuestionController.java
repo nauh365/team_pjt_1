@@ -4,12 +4,10 @@ import com.likelion.sixsenses.entity.Question;
 import com.likelion.sixsenses.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
@@ -23,8 +21,15 @@ public class QuestionController {
     }
 
     @GetMapping("/GET/question")
-    public String listQuestions (Model model) {
-        model.addAttribute("questions", questionService.findAllQuestions());
+    public String listQuestions (
+            Model model,
+            @RequestParam(defaultValue = "0")
+            int page
+    ) {
+        int pageSize = 10;
+        Page<Question> questionPage = questionService.findAllQuestions(page, pageSize);
+        model.addAttribute("questionPage", questionPage);
+        //model.addAttribute("questions", questionService.findAllQuestions());
         return "questions";
     }
 

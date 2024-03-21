@@ -3,6 +3,8 @@ package com.likelion.sixsenses.service;
 import com.likelion.sixsenses.entity.Question;
 import com.likelion.sixsenses.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +48,10 @@ public class QuestionService {
 
     public void deleteQuestion(Long id) {
         questionRepository.deleteById(id);
+    }
+
+    public Page<Question> findAllQuestions(int page, int size) {
+        return questionRepository.findAll(PageRequest.of(page, size));
     }
 
 

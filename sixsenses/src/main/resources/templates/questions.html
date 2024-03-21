@@ -18,7 +18,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="question : ${questions}">
+    <tr th:each="question : ${questionPage.content}">
         <td th:text="${question.id}"></td>
         <td><a th:href="@{/GET/question/{id}(id=${question.id})}" th:text="${question.title}">제목 링크</a></td>
         <td th:text="${question.authorId}"></td>
@@ -27,5 +27,10 @@
     </tr>
     </tbody>
 </table>
+<div>
+    <a th:if="${questionPage.hasPrevious()}" th:href="@{/GET/question(page=${questionPage.number - 1})}">Previous</a>
+    <span th:text="${questionPage.number + 1}">1</span>
+    <a th:if="${questionPage.hasNext()}" th:href="@{/GET/question(page=${questionPage.number + 1})}">Next</a>
+</div>
 </body>
 </html>
