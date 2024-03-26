@@ -54,54 +54,6 @@
         }
 
     </script>
-
-    <style>
-        .container-section {
-            border: 2px solid #dee2e6; /* 경계선 설정 */
-            border-radius: 15px; /* 테두리 라운드 설정 */
-            padding: 20px;
-            margin-bottom: 30px; /* 다음 섹션과의 간격 */
-        }
-
-        .post-meta {
-            font-size: 0.8rem; /* 글씨 크기를 줄입니다. */
-            margin-bottom: 5px; /* 둘 사이의 간격을 좁힙니다. */
-        }
-
-        .comments-section {
-            background-color: #f8f9fa; /* 배경색 없음 */
-            padding: 20px; /* 내부 여백 */
-            margin: 20px 0; /* 위아래 마진 */
-        }
-
-        .comment-actions {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .comment-content {
-            flex: 1;
-            margin-right: 10px; /* 버튼과의 간격 조정 */
-        }
-
-        .comment-buttons {
-            display: flex;
-            gap: 10px; /* 버튼 사이의 간격 */
-        }
-
-        .reply-section {
-            border: 2px solid #dee2e6; /* 경계선 설정 */
-            border-radius: 15px; /* 테두리 라운드 설정 */
-            padding: 20px;
-            background-color: #f8f9fa; /* 연한 회색 배경 */
-            margin-top: 20px; /* 상단 여백 */
-        }
-
-        .btn {
-            margin-top: 10px;
-        }
-    </style>
 </head>
 <body>
 
@@ -202,94 +154,98 @@
 <!-- Single Product Start -->
 <div class="container-fluid py-5 mt-5">
     <div class="container py-5">
-        <div class="container-section">
-        <!-- 게시글 섹션 -->
-        <div class="post-section">
-            <h2 class="fw-bold" th:text="${question.title}">게시글 제목</h2>
-            <p class="post-meta"><span th:text="${question.authorId}">작성자 ID</span></p>
-            <p class="post-meta"><span th:text="${question.createdAt}">작성 시간</span></p>
-            <hr>
-            <p class="mb-3"><span th:text="${question.content}">게시글 내용</span></p>
+        <div class="row g-4 mb-5">
+            <div class="col-lg-8 col-xl-9">
+                <div class="row g-4">
+                    <div class="">
+                        <!--col-lg-4-->
+                        <p><span th:text="${question.createdAt}">작성 시간</span></p>
+                        <h4 class="fw-bold" th:text="${question.title}">게시글 제목</h4>
+                        <p class="mb-3"><span th:text="${question.authorId}">작성자 ID</span></p>
 
-            <div>
-                <a th:href="@{/GET/question/{id}/update(id=${question.id})}" class="btn">
-                    <i class="fas fa-edit"></i>
-                </a>
+                        <p class="mb-3"><span th:text="${question.content}">게시글 내용</span></p>
 
-                <form th:action="@{/POST/question/{id}/delete(id=${question.id})}" method="post" style="display:inline">
-                    <button type="submit" class="btn">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                    <input type="hidden" name="questionId" th:value="${question.id}" />
-                </form>
-
-            </div>
-
-        </div>
-
-        <!-- 댓글 섹션 -->
-        <div class="comments-section" th:each="answer : ${question.answer}">
-            <h4>답변</h4>
-            <div class="comment-actions">
-
-                <!-- 댓글 내용 -->
-                <div class="comment-content">
-                    <p class="mb-2" style="font-size: 14px;"><span th:text="${answer.createdAt}">작성 시간</span></p>
-                    <p><span th:id="'content-' + ${answer.id}" th:text="${answer.content}">답변 내용</span></p>
-                </div>
-
-                <!-- 수정 & 삭제 아이콘 버튼 -->
-                <div class="comment-buttons">
-                    <!-- 답변 수정 버튼 -->
-                    <button class="btn" th:id="'editButton-' + ${answer.id}" th:attr="onclick='toggleEditForm(' + ${answer.id} + ');'">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <!-- 답변 삭제 버튼 -->
-                    <form th:action="@{/POST/answer/{answerId}/delete(answerId=${answer.id})}" method="post" style="display:inline">
-                        <button type="submit" class="btn">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                        <input type="hidden" name="questionId" th:value="${question.id}" />
-                    </form>
-
-                    <!-- 숨겨진 수정 폼 -->
-                    <div th:id="'editForm-' + ${answer.id}" style="display:none">
-                        <form th:action="@{/POST/answer/{answerId}/update(answerId=${answer.id})}" method="post"
-                              onsubmit="showEditButtonAndContent([[${answer.id}]]); return false;">
-                            <input type="hidden" name="questionId" th:value="${question.id}" />
-                            <textarea name="content" required th:text="${answer.content}"></textarea><br>
-                            <button type="submit">수정 완료</button>
+                        <a th:href="@{/GET/question/{id}/update(id=${question.id})}">질문 수정</a>
+                        <form th:action="@{/POST/question/{id}/delete(id=${question.id})}" method="post">
+                            <input type="submit" value="질문 삭제">
                         </form>
                     </div>
-                </div>
+                    <div class="col-lg-12">
+                        <nav>
+                            <div class="nav nav-tabs mb-3">
+                                <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
+                                        id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+                                        aria-controls="nav-about" aria-selected="true">답변</button>
+                            </div>
+                        </nav>
+                        <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+                            <div class="d-flex">
+                                <div class="" th:each="answer : ${question.answer}">
+                                    <p class="mb-2" style="font-size: 14px;"><span th:text="${answer.createdAt}">작성 시간</span></p>
+
+                                        <!--<p><strong>내용:</strong> <span th:text="${answer.content}">답변 내용</span></p>-->
+                                        <p><span th:id="'content-' + ${answer.id}" th:text="${answer.content}">답변 내용</span></p>
+                                        <!-- 숨겨진 수정 폼 -->
+                                        <div th:id="'editForm-' + ${answer.id}" style="display:none">
+                                            <form th:action="@{/POST/answer/{answerId}/update(answerId=${answer.id})}" method="post"
+                                                  onsubmit="showEditButtonAndContent([[${answer.id}]]); return false;">
+                                                <input type="hidden" name="questionId" th:value="${question.id}" />
+                                                <textarea name="content" required th:text="${answer.content}"></textarea><br>
+                                                <button type="submit">수정 완료</button>
+                                            </form>
+                                        </div>
+
+
+                                        <!-- 답변 수정 버튼 -->
+                                        <button th:id="'editButton-' + ${answer.id}" th:attr="onclick='toggleEditForm(' + ${answer.id} + ');'" style="display:inline">답변 수정</button>
+
+
+                                        <form th:action="@{/POST/answer/{answerId}/delete(answerId=${answer.id})}" method="post">
+                                            <input type="submit" value="답변삭제">
+                                            <input type="hidden" name="questionId" th:value="${question.id}" />
+                                        </form>
+
+                                    <div class="d-flex justify-content-between">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form action="/POST/answer/new" method="POST">
+                        <div>
+                            <input type="hidden" name="questionId" th:value="${question.id}" />
+                        </div>
+                        <h4 class="mb-5 fw-bold">답변 등록</h4>
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="border-bottom rounded">
+                                    <input name="authorId" id="authorId" type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="border-bottom rounded my-4">
+                                    <textarea name="content" id="content" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="d-flex justify-content-between py-3 mb-5">
+                                    <div class="d-flex align-items-center">
+
+                                    </div>
+                                    <button class="btn border border-secondary text-primary rounded-pill px-4 py-3" type="submit">답변 등록</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
             </div>
-        </div>
-
-        <!-- 답변 등록 섹션 -->
-        <div class="reply-section">
-            <h3>답변 등록</h3>
-            <form action="/POST/answer/new" method="POST">
-                <input type="hidden" name="questionId" th:value="${question.id}" />
-                <div class="col-lg-6">
-                    <div class="border-bottom rounded">
-                        <input name="authorId" id="authorId" type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
-                    </div>
-                </div>
-
-                <div class="col-lg-12">
-                    <div class="border-bottom rounded my-4">
-                        <textarea name="content" id="content" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea><br>
-                    </div>
-                </div>
-                    <button type="submit" class="btn btn-success">답변 등록</button>
-            </form>
-        </div>
-
         </div>
     </div>
 </div>
 <!-- Single Product End -->
-
 
 
 <a href="/GET/question">목록으로 돌아가기</a>
