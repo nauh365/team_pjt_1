@@ -35,8 +35,17 @@ public class QuestionController {
     }
 
     @GetMapping("/GET/question/{id}")
-    public String showQuestionDetail(@PathVariable Long id, Model model) {
-        questionService.findQuestionById(id).ifPresent(question -> model.addAttribute("question", question));
+    public String showQuestionDetail(
+            @PathVariable
+            Long id,
+            Model model) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        questionService.findQuestionById(id)
+                .ifPresent(question ->
+                        model.addAttribute("question", question));
+
+        model.addAttribute("currentUsername", username);
+
         return "questionDetail";
     }
 
@@ -51,7 +60,8 @@ public class QuestionController {
             @ModelAttribute Question question,
             RedirectAttributes redirectAttributes
     ) {
-        log.info("Received question: {}", question);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        question.setAuthorId(username);
         questionService.createQuestion(question);
         redirectAttributes.addFlashAttribute("message", "질문이 성공적으로 등록되었습니다.");
         return "redirect:/GET/question"; // 질문 목록 페이지로 리다이렉트

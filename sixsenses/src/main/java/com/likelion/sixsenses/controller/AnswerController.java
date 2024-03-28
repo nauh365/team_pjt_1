@@ -2,6 +2,7 @@ package com.likelion.sixsenses.controller;
 
 import com.likelion.sixsenses.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,10 +21,10 @@ public class AnswerController {
     @PostMapping("/POST/answer/new")
     public String createAnswer(
             Long questionId,
-            String authorId,
             String content
     ) {
-        answerService.saveAnswer(questionId, authorId, content);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        answerService.saveAnswer(questionId, username, content);
         return "redirect:/GET/question/" + questionId;
     }
 
