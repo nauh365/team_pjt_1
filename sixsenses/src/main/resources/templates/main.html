@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--  토큰을 세션에 저장-->
+<script>
+    const urlParams = new URL(location.href).searchParams;
+    const token = urlParams.get('token');
+    console.log('token=' + token);
+    sessionStorage.setItem("token", token);
+</script>
+
+<div th:if="${username == null}">
+    <a href="/users/login">로그인</a>
+</div>
+
+<div th:unless="${username == null}">
+  <a>토큰에 들어있는 username = [[${username}]]님</a><br>
+</div>
+<a href="/users/read">글보기</a>
+<br>
+<a href="/users/write">글쓰기</a>
+
+</body>
+</html>
