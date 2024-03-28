@@ -5,6 +5,7 @@ import com.likelion.sixsenses.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -76,7 +77,7 @@ public class QuestionController {
     ) {
         questionService.updateQuestion(id, updateQuestion);
         redirectAttributes.addFlashAttribute("message", "질문이 성공적으로 업데이트되었습니다.");
-        return "redirect:/GET/question"; // 질문 목록 페이지로 리다이렉트
+        return "redirect:/GET/question/" + id; // 질문 목록 페이지로 리다이렉트
     }
 
     @PostMapping("/POST/question/{id}/delete")
