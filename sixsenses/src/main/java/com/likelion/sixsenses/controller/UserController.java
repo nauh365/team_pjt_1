@@ -72,14 +72,6 @@ public class UserController {
   }
 
 
-
-
-
-
-
-
-
-
 //  fetch(script)를 사용하는 방법 (SecurityFilter에 토큰이 전달되는게 로그에 찍히자만, getUser에는 토큰이 찍히지 않음)
   @GetMapping(path="/getUser", headers="AUTHORIZATION")
   @ResponseBody
