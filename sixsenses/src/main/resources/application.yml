@@ -52,8 +52,8 @@ spring:
   datasource:
     url:  jdbc:mysql://book.cnqc8ga2irz8.ap-northeast-2.rds.amazonaws.com:3306/sixsenses
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: dev
-    password: 12345678
+    username:
+    password:
   jpa:
     hibernate:
       ddl-auto: update
