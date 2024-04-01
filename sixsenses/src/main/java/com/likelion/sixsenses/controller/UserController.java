@@ -76,8 +76,8 @@ public class UserController {
   @GetMapping(path="/getUser", headers="AUTHORIZATION")
   @ResponseBody
   public Object getUser() {
+    log.info("####### + {}", SecurityContextHolder.getContext().getAuthentication().getAuthorities());
     String name = SecurityContextHolder.getContext().getAuthentication().getName();
-
     Map<String, String> body = new HashMap<>();
     body.put("username", name);
 

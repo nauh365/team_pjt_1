@@ -42,7 +42,15 @@ public class WebSecurityConfig {
                     // 모두 접근 가능
                     .requestMatchers(
                             "/users/main",
-                            "/users/read"
+                            "/users/read",
+
+//                            현준님 css
+                            "/",
+                            "/css/",
+                            "/js/",
+                            "/lib/",
+                            "/scss/",
+                            "/img/**"
                     )
                     .permitAll()
 
@@ -61,6 +69,7 @@ public class WebSecurityConfig {
                             .userInfoEndpoint(userInfo -> userInfo
                                     .userService(oAuth2UserService))
             )
+
 //           FIXME: Stateless가 무엇인지?
             .sessionManagement(session -> session
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
