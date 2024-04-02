@@ -1,0 +1,28 @@
+#port
+server:
+  port: 8089
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/notice
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: rbtjr123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+# th:method="delete" delete를 쓸 수 있게 만들어주는 설정
+  mvc:
+    hiddenmethod:
+      filter:
+        enable: true
+
+logging:
+  level:
+    com.likelion.sixsenses: debug
