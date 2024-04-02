@@ -74,7 +74,7 @@ public class NoticeController {
     }
 
     @GetMapping("/api/notice/{id}")
-    public ResponseEntity<NoticeResponse> findNotice(@PathVariable long id) {
+    public ResponseEntity<NoticeResponse> findNotice(@PathVariable Long id) {
         Notice notice = noticeService.findById(id);
 
         return ResponseEntity.ok()
@@ -83,7 +83,7 @@ public class NoticeController {
 
     @DeleteMapping("/api/notice/{id}")
     public /*ResponseEntity<Void>*/ String deleteNotice(
-            @PathVariable Long id) {
+            @PathVariable("id") Long id) {
         noticeService.delete(id);
 
 //        return ResponseEntity.ok()

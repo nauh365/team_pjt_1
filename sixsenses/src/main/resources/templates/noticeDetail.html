@@ -56,8 +56,11 @@
         </button>
 
         <!-- 삭제 버튼 -->
+<!--        <form th:action="@{/api/notice/{id}(id=${notice.id})}" th:method="delete">-->
+<!--          <button class="mt-4 ml-2 bg-red-500 text-white px-4 py-2 rounded-md">게시글 삭제</button>-->
+<!--        </form>-->
         <form th:action="@{/api/notice/{id}(id=${notice.id})}" th:method="delete">
-          <button class="mt-4 ml-2 bg-red-500 text-white px-4 py-2 rounded-md">게시글 삭제</button>
+          <button class="mt-4 ml-2 bg-red-500 text-white px-4 py-2 rounded-md" type="submit">게시글 삭제</button>
         </form>
       </div>
     </div>
