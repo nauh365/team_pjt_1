@@ -50,10 +50,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     if (authHeader != null && authHeader.startsWith("Bearer")) {
       String token = authHeader.split(" ")[1];
-      log.info(token);
+      log.info("@@@ : " + token);
       log.info(SecurityContextHolder.getContext().toString());
       // Token이 유효한 토큰인지를 검사
       if (jwtTokenUtils.validate(token)){
+        // 토큰이 유효하다면 해당 Token을 바탕으로 사용자 정보를 SecurityContext에 등록
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         // 사용자 정보 회수
         String username = jwtTokenUtils
@@ -77,6 +78,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         // 인증 정보 등록
         context.setAuthentication(authentication);
         SecurityContextHolder.setContext(context);
+        log.info(SecurityContextHolder.getContext().toString());
         log.info("set security context with jwt");
       } else {
         log.warn("jwt validation failed");
