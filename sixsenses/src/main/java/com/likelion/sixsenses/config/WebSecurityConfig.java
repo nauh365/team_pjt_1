@@ -53,13 +53,16 @@ public class WebSecurityConfig {
                             "/api/notice/{id}",
                             "/api/notice/update/{id}",
                             "/api/notice/delete/{id}",
+                            //도서상세
+                            "/books/**",
+                            "/library/**",
 
 //                            현준님 css
                             "/",
-                            "/css/",
-                            "/js/",
-                            "/lib/",
-                            "/scss/",
+                            "/css/**",
+                            "/js/**",
+                            "/lib/**",
+                            "/scss/**",
                             "/img/**"
                     )
                     .permitAll()

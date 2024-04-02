@@ -493,5 +493,19 @@
 .footer .footer-item p.mb-4 {
     line-height: 35px;
 }
+.library{
+    background-color: #81c408;
+    margin-bottom: 3px;
+}
+.library:hover{
+    background-color: #71b408;
+    cursor: pointer;
+}
+.library-location {
+    display: flex;
+}
+.library-location .icon {
+    margin-right: 10px;
+}
 /*** Footer End ***/
 
