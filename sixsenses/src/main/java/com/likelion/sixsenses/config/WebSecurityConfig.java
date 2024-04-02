@@ -51,6 +51,8 @@ public class WebSecurityConfig {
                             "/api/addNotice",
                             "/api/notices",
                             "/api/notice/{id}",
+                            "/api/notice/update/{id}",
+                            "/api/notice/delete/{id}",
 
 //                            현준님 css
                             "/",
