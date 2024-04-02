@@ -17,11 +17,7 @@ import java.util.List;
 public class NoticeService {
 
     private final NoticeRepository noticeRepository;
-    public Notice save(String title, String content, String writer) {
-        Notice notice = new Notice();
-        notice.setTitle(title);
-        notice.setContent(content);
-        notice.setWriter(writer);
+    public Notice save(Notice notice) {
         return noticeRepository.save(notice);
     }
 

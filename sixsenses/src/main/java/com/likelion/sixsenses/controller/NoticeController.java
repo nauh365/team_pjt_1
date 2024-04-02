@@ -42,15 +42,9 @@ public class NoticeController {
     }
 
     @PostMapping("/api/addNotice")
-    public String addNotice(
-            @RequestParam("title")
-            String title,
-            @RequestParam("content")
-            String content,
-            @RequestParam("writer")
-            String writer
+    public String addNotice(Notice notice
     ) {
-        Notice savedNotice = noticeService.save(title, content, writer);
+        noticeService.save(notice);
         return "redirect:/notice/list";
     }
 
@@ -61,8 +55,21 @@ public class NoticeController {
             Model model
     ) {
         model.addAttribute("notice", noticeService.findById(id));
-
         return "noticeModify";
+    }
+
+    // 공지사항 업데이트
+    @PostMapping("/api/notice/update/{id}")
+    public String updateNotice(
+            @PathVariable("id") Long id, Notice notice
+    ) {
+        Notice noticeTemp = noticeService.findById(id);
+        noticeTemp.setTitle(notice.getTitle());
+        noticeTemp.setContent(notice.getContent());
+        noticeTemp.setWriter(notice.getWriter());
+
+        noticeService.save(noticeTemp);
+        return String.format("redirect:/notice/detail/%d", id);
     }
 
     @GetMapping("/api/notices")
@@ -84,33 +91,10 @@ public class NoticeController {
                 .body(new NoticeResponse(notice));
     }
 
-    @DeleteMapping("/api/notice/{id}")
-    public /*ResponseEntity<Void>*/ String deleteNotice(
+    @GetMapping("/api/notice/delete/{id}")
+    public String deleteNotice(
             @PathVariable("id") Long id) {
         noticeService.delete(id);
-
-//        return ResponseEntity.ok()
-//                .build();
         return "redirect:/notice/list";
     }
-
-    @PutMapping("/api/notice/{id}")
-    public /*ResponseEntity<Notice>*/ String updateNotice(
-            @PathVariable("id")
-            Long id,
-            @RequestParam("title")
-            String title,
-            @RequestParam("content")
-            String content,
-            @RequestParam("writer")
-            String writer
-    ) {
-//        Notice updateNotice = noticeService.update(id, request);
-//        return ResponseEntity.ok()
-//                .body(updateArticle);
-        noticeService.update(
-                id, title, content, writer);
-        return String.format("redirect:/notice/delete/%d", id);
-    }
-
 }
