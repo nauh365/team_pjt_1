@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      /* 부모 요소를 화면의 중앙에 배치하기 위한 스타일 */
+      body, html {
+          height: 70%;
+          margin: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      a {
+          font-size: 10px; /* 원하는 크기로 조정 */
+      }
+  </style>
+</head>
+<body>
+<div>
+  <h3>로그인</h3>
+  <hr>
+  <a href="/oauth2/authorization/naver">
+    <img src="/img/Naver.png" width="183" height="44">
+  </a>
+  <br>
+  <a href="/oauth2/authorization/kakao">
+    <img src="/img/Kakao.png">
+  </a>
+  <hr>
+</div>
+</body>
+</html>

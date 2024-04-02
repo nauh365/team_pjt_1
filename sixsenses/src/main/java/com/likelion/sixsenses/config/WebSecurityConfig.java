@@ -43,6 +43,11 @@ public class WebSecurityConfig {
                     .requestMatchers(
                             "/users/main",
                             "/users/read",
+//                            공지사항 (다시 바꿔서 올려드릴 예정)
+                            "/",
+                            "/detail/{id}",
+                            "add",
+                            "/update/{id}",
 
 //                            현준님 css
                             "/",
