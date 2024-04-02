@@ -1,10 +1,6 @@
 package com.likelion.sixsenses.book.dto.response;
 
 import com.likelion.sixsenses.book.entity.Book;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -14,6 +10,7 @@ public class BookDetailDto {
 
     private boolean canBorrow;
 
+    private String bookISBN;
     private String bookTitle;
 
     private String bookSummary;
@@ -30,6 +27,7 @@ public class BookDetailDto {
     public BookDetailDto(Book book){
         this.bookId = book.getBookId();
         this.bookCover = book.getBookCover();
+        this.bookISBN = book.getBookISBN();
         this.bookDate = book.getBookDate();
         this.bookPublisher = book.getBookPublisher();
         this.bookTitle = book.getBookTitle();
