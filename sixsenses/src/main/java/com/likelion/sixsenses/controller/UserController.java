@@ -58,16 +58,7 @@ public class UserController {
 
   @GetMapping("write")
   public String write(
-          Model model
   ){
-    log.info(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
-    String user = SecurityContextHolder.getContext().getAuthentication().getName();
-    model.addAttribute("user", user);
-
-//    getPrincipal에 있는 "nickname" 가져오기 (gradle 추가)
-//     Map<String, Object> map = objectMapper.convertValue(SecurityContextHolder.getContext().getAuthentication().getPrincipal(), Map.class);
-//    Map<String, String> userMap = objectMapper.convertValue(map.get("attributes"), Map.class);
-//    model.addAttribute("user", userMap.get("nickname"));
     return "write";
   }
 
