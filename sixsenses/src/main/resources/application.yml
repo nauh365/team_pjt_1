@@ -51,10 +51,10 @@ spring:
               - mobile
 
   datasource:
-    url: jdbc:mysql://localhost:3306/notice
+    url: jdbc:mysql://localhost:3306/sixsenses
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: rbtjr123
+    password: 12345678
   jpa:
     hibernate:
       ddl-auto: update
