@@ -69,8 +69,10 @@ public class UserController {
   public Object getUser() {
     log.info("####### + {}", SecurityContextHolder.getContext().getAuthentication().getAuthorities());
     String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    String auth = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
     Map<String, String> body = new HashMap<>();
     body.put("username", name);
+    body.put("auth", auth);
 
     return body;
   }

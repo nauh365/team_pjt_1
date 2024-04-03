@@ -66,10 +66,11 @@ public class WebSecurityConfig {
                             "/img/**"
                     )
                     .permitAll()
-
                     // 로그인 후 접근 가능
                     .requestMatchers(
-                            "/users/write"
+                            "/users/write",
+                            "/GET/**",
+                            "/POST/**"
                     )
                     .permitAll()
                     .anyRequest()
