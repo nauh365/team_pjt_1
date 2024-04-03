@@ -39,8 +39,35 @@
             console.log(res);
             return res.json()
         }).then(body => {
-            console.log(body.username)
-            document.getElementById("username-p").innerText = body.username
+            const username = body.username;
+            const userAuth = body.auth;
+            console.log(username)
+            console.log(userAuth)
+
+            document.getElementById("authorId").value = body.username;
+
+            // 사용자 이름을 확인하여 특정 div의 표시 여부 결정
+            const authorDiv = document.getElementById("authorDiv");
+            const authorId = document.getElementById("authorDiv").getAttribute('data-author-id');
+
+
+            console.log(authorDiv)
+            console.log(authorId)
+
+            if (username === authorId) {
+                authorDiv.style.display = 'block';
+            } else {
+                authorDiv.style.display = 'none';
+            }
+
+
+
+            if (userAuth === "[ROLE_ADMIN]") {
+                replyDiv.style.display = 'block';
+            } else {
+                replyDiv.style.display = 'none';
+            }
+
         }).catch(err => {
             console.log(err);
         })
@@ -228,7 +255,7 @@
             <hr>
             <p class="mb-3"><span th:text="${question.content}">게시글 내용</span></p>
 
-            <div th:if="${question.authorId == currentUsername}">
+            <div id="authorDiv" th:attr="data-author-id=${question.authorId}" style="display:none;">
                 <a th:href="@{/GET/question/{id}/update(id=${question.id})}" class="btn">
                     <i class="fas fa-edit"></i>
                 </a>
@@ -256,7 +283,7 @@
                 </div>
 
                 <!-- 수정 & 삭제 아이콘 버튼 -->
-                <div class="comment-buttons" th:if="${answer.authorId == currentUsername}">
+                <div class="comment-buttons">
                     <!-- 답변 수정 버튼 -->
                     <button class="btn" th:id="'editButton-' + ${answer.id}" th:attr="onclick='toggleEditForm(' + ${answer.id} + ');'">
                         <i class="fas fa-edit"></i>
@@ -283,11 +310,11 @@
         </div>
 
         <!-- 답변 등록 섹션 -->
-        <div th:if="${isAdmin != null and isAdmin}" class="reply-section">
+        <div class="reply-section" id="replyDiv" style="display:none;" >
             <h3>답변 등록</h3>
             <form action="/POST/answer/new" method="POST">
                 <input type="hidden" name="questionId" th:value="${question.id}" />
-
+                <input type="hidden" id="authorId" name="authorId" />
 
                 <div class="col-lg-12">
                     <div class="border-bottom rounded my-4">

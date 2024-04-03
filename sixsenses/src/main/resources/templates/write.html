@@ -17,7 +17,8 @@
         console.log(res);
         return res.json()
     }).then(body => {
-        console.log(body.username)
+        console.log(body.username);
+        console.log(body.auth);
         document.getElementById("username-p").innerText = body.username
     }).catch(err => {
         console.log(err);

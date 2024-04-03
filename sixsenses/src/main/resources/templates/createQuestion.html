@@ -180,16 +180,16 @@
             <div class="post-section">
                 <h3>질문 등록</h3>
                 <form action="/POST/question/new" method="POST">
-                    <!--<input type="hidden" id="authorId" name="authorId" />-->
+                    <input type="hidden" id="authorId" name="authorId" />
                     <div class="col-lg-6">
                         <div class="border-bottom rounded">
-                            <input name="title" id="title" type="text" class="form-control border-0 me-4" required>
+                            <input name="title" id="title" type="text" class="form-control border-0 me-4" placeholder="제목을 입력하세요." required >
                         </div>
                     </div>
 
                     <div class="col-lg-12">
                         <div class="border-bottom rounded my-4">
-                            <textarea name="content" id="content" class="form-control border-0" cols="30" rows="8" required></textarea><br>
+                            <textarea name="content" id="content" class="form-control border-0" cols="30" rows="8" placeholder="내용을 입력하세요." required></textarea><br>
                         </div>
                     </div>
 
@@ -324,5 +324,25 @@
 
 <!-- Template Javascript -->
 <script src="/js/main.js"></script>
+
+<script>
+    var token = sessionStorage.getItem("token");
+    fetch("/users/getUser", {
+        method: 'GET',
+        headers: {
+            AUTHORIZATION: 'Bearer ' + token
+        },
+        redirect: "follow"
+    }).then(res => {
+        console.log(res);
+        return res.json();
+    }).then(body => {
+        console.log(body.username);
+        document.getElementById("authorId").value = body.username;
+    }).catch(err => {
+        console.log(err);
+    });
+</script>
+
 </body>
 </html>

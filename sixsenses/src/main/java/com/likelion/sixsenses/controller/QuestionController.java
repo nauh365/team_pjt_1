@@ -28,6 +28,9 @@ public class QuestionController {
             @RequestParam(defaultValue = "0")
             int page
     ) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        log.info("somin users log: " + username);
         int pageSize = 10;
         Page<Question> questionPage = questionService.findAllQuestions(page, pageSize);
         model.addAttribute("questionPage", questionPage);
@@ -40,18 +43,18 @@ public class QuestionController {
             @PathVariable
             Long id,
             Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        boolean isAdmin = authentication.getAuthorities().stream()
-                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String username = authentication.getName();
+//        boolean isAdmin = authentication.getAuthorities().stream()
+//                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
 
 
         questionService.findQuestionById(id)
                 .ifPresent(question ->
                         model.addAttribute("question", question));
 
-        model.addAttribute("currentUsername", username);
-        model.addAttribute("isAdmin", isAdmin);
+//        model.addAttribute("currentUsername", username);
+//        model.addAttribute("isAdmin", isAdmin);
 
         return "questionDetail";
     }
@@ -67,8 +70,8 @@ public class QuestionController {
             @ModelAttribute Question question,
             RedirectAttributes redirectAttributes
     ) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        question.setAuthorId(username);
+        //String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        //question.setAuthorId(username);
         questionService.createQuestion(question);
         redirectAttributes.addFlashAttribute("message", "질문이 성공적으로 등록되었습니다.");
         return "redirect:/GET/question"; // 질문 목록 페이지로 리다이렉트
