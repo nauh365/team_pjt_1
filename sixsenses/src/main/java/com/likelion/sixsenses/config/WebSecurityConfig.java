@@ -35,7 +35,8 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(auth -> auth
                     // 로그인
                     .requestMatchers(
-                            "/users/login"
+                            "/users/login",
+                            "/home"
                     )
                     .anonymous()
 
@@ -64,6 +65,7 @@ public class WebSecurityConfig {
                             "/lib/**",
                             "/scss/**",
                             "/img/**"
+
                     )
                     .permitAll()
                     // 로그인 후 접근 가능
