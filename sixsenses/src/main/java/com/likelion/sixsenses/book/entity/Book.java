@@ -1,5 +1,6 @@
 package com.likelion.sixsenses.book.entity;
 
+import com.likelion.sixsenses.library.entity.Library;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,9 +13,12 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookId;
 
-    private String ISBN;
+    @Column(name = "book_ISBN")
+    private String bookISBN;
 
-    private int libraryId;
+    @OneToOne
+    @JoinColumn(name = "library_id")
+    private Library libraryId;
     private int quantity;
 
     private String bookTitle;
@@ -30,6 +34,8 @@ public class Book {
 
     private String bookDate;
 
+    @Version
+    private long version;
     public int getQuantity(){
         return quantity;
     }

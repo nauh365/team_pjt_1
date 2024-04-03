@@ -43,6 +43,19 @@ public class WebSecurityConfig {
                     .requestMatchers(
                             "/users/main",
                             "/users/read",
+                            // 공지사항
+                            "/notice/list",
+                            "/notice/add",
+                            "/notice/detail/{id}",
+                            "/notice/update/{id}",
+                            "/api/addNotice",
+                            "/api/notices",
+                            "/api/notice/{id}",
+                            "/api/notice/update/{id}",
+                            "/api/notice/delete/{id}",
+                            //도서상세
+                            "/books/**",
+                            "/library/**",
 
 //                            현준님 css
                             "/",
