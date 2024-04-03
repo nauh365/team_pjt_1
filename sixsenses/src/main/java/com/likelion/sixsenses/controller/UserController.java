@@ -69,8 +69,11 @@ public class UserController {
   public Object getUser() {
     log.info("####### + {}", SecurityContextHolder.getContext().getAuthentication().getAuthorities());
     String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    String auth = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString();
     Map<String, String> body = new HashMap<>();
     body.put("username", name);
+    body.put("auth", auth);
+
     return body;
   }
   // jwt , 상태를 저장하지 않는 인증
