@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>도서 통합 관리 시스템</title>
+  <style>
+    /* 미디어 쿼리: 화면 너비가 800px 미만일 때 */
+    @media screen and (max-width: 800px) {
+      #main_container {
+        padding-top: 130px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="fixed inset-x-0 top-0 z-50 left-0 bg-black text-white body-font border-b border-gray-200">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <div
+        class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+      >
+        <span class="ml-3 text-xl text-white">
+          <a href="/" class="hover:underline">도서 통합 관리 시스템</a>
+        </span>
+      </div>
+      <div class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <div class="mr-5">
+          <a href="/notice/list" class="hover:underline">공지사항</a>
+        </div>
+        <div class="mr-5">
+          <a href="/notice/list" class="hover:underline">마이페이지</a>
+        </div>
+        <div class="mr-5">
+          <a href="/notice/list" class="hover:underline">Q&A</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div id="main_container" class="container mx-auto p-8 pt-24">
+      <h1 class="text-3xl font-bold mb-4">공지사항</h1>
+
+      <form action="#" method="get" class="mb-4">
+        <label for="search" class="block text-sm font-medium text-gray-600">제목이나 내용으로 검색</label>
+        <div class="flex items-center">
+          <input type="text" id="search" name="search" class="mt-1 p-2 flex-1 block w-full border-2 border-gray-400 rounded-md">
+          <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-2 rounded-md">검색</button>
+          <!-- 게시글 추가 버튼 -->
+          <button class="ml-7 bg-indigo-500 text-white px-4 py-2 rounded-md">
+            <a href="/notice/add" class="hover:underline">
+            게시글 추가
+            </a>
+          </button>
+        </div>
+      </form>
+
+      <!-- 게시물 목록 시작 -->
+      <div class="grid grid-cols-12 md:grid-cols-12 lg:grid-cols-12">
+        <!-- 각각의 게시물 카드 시작 -->
+        <div class="col-span-12 bg-white mb-2 p-4 rounded-md shadow-md cursor-pointer" th:each="notice: ${notices}">
+          <a th:href="@{/notice/detail/{id}(id=${notice.id})}" class="text-xl font-semibold">[[${notice.title}]]</a>
+          <p class="text-gray-600 mt-2 mb-2">글쓴이: <span class="font-bold">[[${notice.writer}]]</span></p>
+<!--          <p class="text-gray-600 mb-2">작성날짜: <span class="font-bold">2024-03-26 11:00:00</span></p>-->
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>

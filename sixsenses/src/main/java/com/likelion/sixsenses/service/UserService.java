@@ -51,6 +51,7 @@ public class UserService implements UserDetailsManager {
     // CustomUserDetails 이용하기
     UserEntity userEntity = optionalUser.get();
     return CustomUserDetails.builder()
+            .id(userEntity.getId())
             .username(userEntity.getUsername())
             .password(userEntity.getPassword())
             .name(userEntity.getName())

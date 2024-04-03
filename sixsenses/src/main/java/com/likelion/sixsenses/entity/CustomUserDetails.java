@@ -52,6 +52,9 @@ public class CustomUserDetails implements UserDetails {
     }
     return grantedAuthorities;
   }
+  public long getUserId(){
+    return this.id;
+  }
 
   @Override
   public String getPassword() {
