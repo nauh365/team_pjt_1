@@ -31,7 +31,12 @@
 </head>
 
 <body>
-
+<script>
+    const urlParams = new URL(location.href).searchParams;
+    const token = urlParams.get('token');
+    console.log('token=' + token);
+    sessionStorage.setItem("token", token);
+</script>
   <!-- Spinner Start -->
   <div id="spinner"
     class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
@@ -51,7 +56,12 @@
         <!--메인 네비바 넣을 것-->
         <div class="top-link pe-2">
           <a href="#" class="text-white"><small class="text-white mx-2">공지사항</small>/</a>
-          <a href="#" class="text-white"><small class="text-white mx-2">로그인</small></a>
+          <div th:if="${username == null}">
+            <a href="/users/login" class="text-white"><small class="text-white mx-2">로그인</small></a>
+          </div>
+          <div th:unless="${username == null}">
+            <a class="text-white"><small class="text-white mx-2">[[${username}]]님</small></a><br>
+          </div>
         </div>
       </div>
     </div>

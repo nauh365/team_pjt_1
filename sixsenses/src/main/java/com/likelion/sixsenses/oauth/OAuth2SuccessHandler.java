@@ -80,7 +80,7 @@ public class OAuth2SuccessHandler
     String jwt = tokenUtils.generateToken(details);
 
     String targetUrl = String.format(
-            "http://localhost:8089/users/main?token=%s", jwt
+            "http://localhost:8089/home?token=%s", jwt
     );
 
 //    details.getAuthorities();
