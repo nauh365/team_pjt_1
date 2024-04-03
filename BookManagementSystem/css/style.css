@@ -178,7 +178,7 @@
 
 /*** Hero Header ***/
 .hero-header {
-    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1));
+    background: linear-gradient(rgba(248, 223, 173, 0.1), rgba(248, 223, 173, 0.1)), url(../img/hero-img.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -309,7 +309,6 @@
     overflow: hidden;
     transition: 0.5s;
     border-radius: 10px 10px 0 0;
-    height: 448px;
 }
 
 .fruite .fruite-item .fruite-img img {
@@ -493,6 +492,20 @@
 
 .footer .footer-item p.mb-4 {
     line-height: 35px;
+}
+.library{
+    background-color: #81c408;
+    margin-bottom: 3px;
+}
+.library:hover{
+    background-color: #71b408;
+    cursor: pointer;
+}
+.library-location {
+    display: flex;
+}
+.library-location .icon {
+    margin-right: 10px;
 }
 /*** Footer End ***/
 
