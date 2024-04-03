@@ -26,17 +26,17 @@
             } else {
                 $('.fixed-top').removeClass('shadow').css('top', 0);
             }
-        } 
+        }
     });
-    
-    
-   // Back to top button
-   $(window).scroll(function () {
-    if ($(this).scrollTop() > 300) {
-        $('.back-to-top').fadeIn('slow');
-    } else {
-        $('.back-to-top').fadeOut('slow');
-    }
+
+
+    // Back to top button
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $('.back-to-top').fadeIn('slow');
+        } else {
+            $('.back-to-top').fadeOut('slow');
+        }
     });
     $('.back-to-top').click(function () {
         $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
@@ -147,6 +147,32 @@
         button.parent().parent().find('input').val(newVal);
     });
 
+    // 토근 header로 옮기는 스크립트
+    var token = sessionStorage.getItem(("token"))
+    fetch("/users/getUser",{
+        method:'GET',
+        headers:{
+            AUTHORIZATION:'Bearer ' + token
+        },
+        redirect: "follow"
+    }).then(res =>{
+        console.log(res);
+        return res.json()
+    }).then(body => {
+        console.log(body.username);
+        console.log(body.auth);
+
+        var usernameP = document.getElementById("username-p");
+        if (usernameP) {
+            usernameP.innerText = body.username;
+        }
+        var authorId = document.getElementById("authorId");
+        if (authorId) {
+            authorId.value = body.username;
+        }
+
+    }).catch(err => {
+        console.log(err);
+    })
+
 })(jQuery);
-
-
