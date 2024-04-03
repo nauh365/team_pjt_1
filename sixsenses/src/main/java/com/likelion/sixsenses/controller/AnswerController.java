@@ -21,10 +21,11 @@ public class AnswerController {
     @PostMapping("/POST/answer/new")
     public String createAnswer(
             Long questionId,
+            String authorId,
             String content
     ) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        answerService.saveAnswer(questionId, username, content);
+        //String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        answerService.saveAnswer(questionId, authorId, content);
         return "redirect:/GET/question/" + questionId;
     }
 

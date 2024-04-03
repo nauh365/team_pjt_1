@@ -146,9 +146,6 @@
         }
         button.parent().parent().find('input').val(newVal);
     });
-<<<<<<< HEAD
 
-=======
->>>>>>> dev
 })(jQuery);
 

@@ -46,17 +46,18 @@ public class WebSecurityConfig {
 
 //                            현준님 css
                             "/",
-                            "/css/",
-                            "/js/",
-                            "/lib/",
-                            "/scss/",
+                            "/css/**",
+                            "/js/**",
+                            "/lib/**",
+                            "/scss/**",
                             "/img/**"
                     )
                     .permitAll()
-
                     // 로그인 후 접근 가능
                     .requestMatchers(
-                            "/users/write"
+                            "/users/write",
+                            "/GET/**",
+                            "/POST/**"
                     )
                     .permitAll()
                     .anyRequest()
