@@ -71,7 +71,6 @@ public class UserController {
     String name = SecurityContextHolder.getContext().getAuthentication().getName();
     Map<String, String> body = new HashMap<>();
     body.put("username", name);
-
     return body;
   }
   // jwt , 상태를 저장하지 않는 인증
