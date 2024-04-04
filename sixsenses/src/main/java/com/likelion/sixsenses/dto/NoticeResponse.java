@@ -1,9 +1,11 @@
 package com.likelion.sixsenses.dto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import com.likelion.sixsenses.entity.Notice;
 
 @Getter
+@AllArgsConstructor
 public class NoticeResponse {
     private final String title;
     private final String content;

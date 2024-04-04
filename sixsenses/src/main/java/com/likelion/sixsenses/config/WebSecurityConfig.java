@@ -44,12 +44,12 @@ public class WebSecurityConfig {
                             "/users/read",
                             // 공지사항
                             "/notice/**",
-                            "/test",
                             "/api/addNotice",
                             "/api/notices",
                             "/api/notice/{id}",
                             "/api/notice/update/{id}",
                             "/api/notice/delete/{id}",
+                            "/notice/search",
                             //도서상세
                             "/books/**",
                             "/library/**",

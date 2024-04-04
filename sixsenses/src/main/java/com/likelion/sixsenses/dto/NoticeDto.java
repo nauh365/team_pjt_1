@@ -1,12 +1,11 @@
 package com.likelion.sixsenses.dto;
 
-import com.likelion.sixsenses.entity.Notice;
 import lombok.*;
 @Getter
 @ToString
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class NoticeDto {
     private Long id;
     @Setter
@@ -15,7 +14,6 @@ public class NoticeDto {
     private String content;
     @Setter
     private String writer;
-
 
 //    public Notice toEntity(String writer) {
 //        return Notice.builder()
