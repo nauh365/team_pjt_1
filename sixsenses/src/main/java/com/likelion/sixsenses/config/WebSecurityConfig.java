@@ -44,7 +44,6 @@ public class WebSecurityConfig {
                             "/users/read",
                             // 공지사항
                             "/notice/**",
-                            "/test",
                             "/api/addNotice",
                             "/api/notices",
                             "/api/notice/{id}",

@@ -103,16 +103,15 @@ public class NoticeController {
         noticeService.delete(id);
         return "redirect:/notice/list";
     }
-    @GetMapping("/test")
+    @GetMapping("/notice/search")
     public String Test(
         @RequestParam(value = "keyword")
         String keyword,
         Model model
     ) {
         List<NoticeDto> noticeDtos = boardService.searchPosts(keyword);
-        log.info("@@@@@@ : {}", noticeDtos);
         model.addAttribute("notice", noticeDtos);
 
-        return "test";
+        return "noticeSearch";
     }
 }
