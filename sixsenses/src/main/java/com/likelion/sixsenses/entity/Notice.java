@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Entity
 @NoArgsConstructor
-public class Notice {
+public class Notice extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
