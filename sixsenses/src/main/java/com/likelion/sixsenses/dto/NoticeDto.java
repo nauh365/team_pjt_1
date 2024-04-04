@@ -15,11 +15,4 @@ public class NoticeDto {
     @Setter
     private String writer;
 
-//    public Notice toEntity(String writer) {
-//        return Notice.builder()
-//                .title(title)
-//                .content(content)
-//                .writer(writer)
-//                .build();
-//    }
 }
