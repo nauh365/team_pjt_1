@@ -22,7 +22,9 @@ public class NoticeService {
     }
 
     public List<Notice> findAll() {
-        return noticeRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        return noticeRepository.findAll(Sort.by(Sort.Direction.DESC, "id")
+
+        );
     }
 
     public Notice findById(long id) {
