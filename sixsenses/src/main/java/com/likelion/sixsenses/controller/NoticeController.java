@@ -1,9 +1,12 @@
 package com.likelion.sixsenses.controller;
 
+import com.likelion.sixsenses.dto.NoticeDto;
 import com.likelion.sixsenses.dto.NoticeResponse;
 import com.likelion.sixsenses.entity.Notice;
 import com.likelion.sixsenses.service.NoticeService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class NoticeController {
@@ -96,5 +99,15 @@ public class NoticeController {
             @PathVariable("id") Long id) {
         noticeService.delete(id);
         return "redirect:/notice/list";
+    }
+
+    // 검색 기능
+    @GetMapping("/notice/search")
+    public String search(@RequestParam(value = "keyword") String keyword, Model model) {
+        List<NoticeDto> noticeDtoList = noticeService.searchPosts(keyword);
+        log.info("@@@@@ {}", noticeDtoList);
+        model.addAttribute("noticeList", noticeDtoList);
+
+        return "noticeSearch";
     }
 }
