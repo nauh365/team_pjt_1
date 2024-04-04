@@ -25,8 +25,6 @@ public class WebSecurityConfig {
   private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
 
-
-
   @Bean
   public SecurityFilterChain securityFilterChain(
           HttpSecurity http
@@ -45,10 +43,8 @@ public class WebSecurityConfig {
                             "/users/main",
                             "/users/read",
                             // 공지사항
-                            "/notice/list",
-                            "/notice/add",
-                            "/notice/detail/{id}",
-                            "/notice/update/{id}",
+                            "/notice/**",
+                            "/test",
                             "/api/addNotice",
                             "/api/notices",
                             "/api/notice/{id}",
@@ -57,7 +53,6 @@ public class WebSecurityConfig {
                             //도서상세
                             "/books/**",
                             "/library/**",
-
 //                            현준님 css
                             "/",
                             "/css/**",
@@ -65,7 +60,6 @@ public class WebSecurityConfig {
                             "/lib/**",
                             "/scss/**",
                             "/img/**"
-
                     )
                     .permitAll()
                     // 로그인 후 접근 가능

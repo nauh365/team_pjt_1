@@ -147,6 +147,23 @@
         button.parent().parent().find('input').val(newVal);
     });
 
+    // 토근 header로 옮기는 스크립트
+    var token = sessionStorage.getItem(("token"))
+    fetch("/users/getUser",{
+        method:'GET',
+        headers:{
+            AUTHORIZATION:'Bearer ' + token
+        },
+        redirect: "follow"
+    }).then(res =>{
+        console.log(res);
+        return res.json()
+    }).then(body => {
+        console.log(body.username);
+        console.log(body.auth);
+        document.getElementById("username-p").innerText = body.username
+    }).catch(err => {
+        console.log(err);
+    })
+
 })(jQuery);
-
-
