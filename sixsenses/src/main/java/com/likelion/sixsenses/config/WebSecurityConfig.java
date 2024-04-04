@@ -54,6 +54,7 @@ public class WebSecurityConfig {
                             "/api/notice/{id}",
                             "/api/notice/update/{id}",
                             "/api/notice/delete/{id}",
+                            "/notice/search",
                             //도서상세
                             "/books/**",
                             "/library/**",
