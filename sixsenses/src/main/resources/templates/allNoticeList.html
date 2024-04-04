@@ -32,26 +32,7 @@
     <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-<script>
-// 토근 header로 옮기는 스크립트
-var token = sessionStorage.getItem(("token"))
-fetch("/users/getUser",{
-method:'GET',
-headers:{
-AUTHORIZATION:'Bearer ' + token
-},
-redirect: "follow"
-}).then(res =>{
-console.log(res);
-return res.json()
-}).then(body => {
-console.log(body.username);
-console.log(body.auth);
-document.getElementById("username-p").innerText = body.username
-}).catch(err => {
-console.log(err);
-})
-</script>
+
 <!--기존 헤더-->
 <!--
 <header class="fixed inset-x-0 top-0 z-50 left-0 bg-black text-white body-font border-b border-gray-200">
@@ -152,12 +133,18 @@ console.log(err);
   <div id="main_container" class="container mx-auto p-8 pt-24">
     <h1 class="text-3xl font-bold mb-4">공지사항</h1>
 
-    <form action="notice/search" method="get" class="mb-4">
-      <label for="search" class="block text-sm font-medium text-gray-600">제목이나 내용으로 검색</label>
+
+    <form action="/test" method="get" class="mb-4">
+
+      <label for="search" class="block text-sm font-medium text-gray-600">제목으로 검색</label>
+
       <div class="flex items-center">
+
         <input type="text" id="search" name="keyword"
                class="mt-1 p-2 flex-1 block w-full border-2 border-gray-400 rounded-md">
         <button type="submit" class="ml-2 bg-blue-500 text-white px-4 py-2 rounded-md">검색</button>
+
+
         <!-- 게시글 추가 버튼 -->
         <button class="ml-7 bg-indigo-500 text-white px-4 py-2 rounded-md">
           <a href="/notice/add" class="hover:underline">

@@ -8,6 +8,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class NoticeDto {
     private Long id;
     @Setter

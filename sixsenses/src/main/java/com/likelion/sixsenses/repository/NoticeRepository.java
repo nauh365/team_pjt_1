@@ -7,7 +7,5 @@ import java.util.List;
 
 public interface NoticeRepository
         extends JpaRepository<Notice, Long> {
-
-    // 검색 기능
-    List<Notice> findByTitleContaining(String keyword);
+  List<Notice> findByTitleContaining(String keyword);
 }
