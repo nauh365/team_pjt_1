@@ -38,6 +38,19 @@ fetch("/users/getUser",{
         replyDiv.style.display = 'none';
     }
 
+    // 사용자 이름을 페이지에 표시하고 로그인 링크를 숨깁니다.
+    if (body.username) {
+        var usernameDisplay = document.getElementById("username-display");
+        var loginLink = document.getElementById("login-link");
+        var userNameDiv = document.getElementById("user-name");
+
+        if (usernameDisplay && loginLink && userNameDiv) {
+            usernameDisplay.innerText = body.username + '님'; // 사용자 이름 표시
+            loginLink.style.display = 'none'; // 로그인 링크 숨김
+            userNameDiv.style.display = 'block'; // 사용자 이름을 담은 div 표시
+        }
+    }
+
 }).catch(err => {
     console.log(err);
 })
