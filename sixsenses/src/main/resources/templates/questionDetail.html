@@ -49,12 +49,14 @@
             </div>
             <!--메인 네비바 넣을 것-->
             <div class="top-link pe-2">
-                <a href="#" class="text-white"><small class="text-white mx-2">공지사항</small>/</a>
-                <div th:if="${username == null}">
+                <a href="notice/list" class="text-white"><small class="text-white mx-2">공지사항</small>/</a>
+                <!-- 로그인 링크 -->
+                <div id="login-link">
                     <a href="/users/login" class="text-white"><small class="text-white mx-2">로그인</small></a>
                 </div>
-                <div th:unless="${username == null}">
-                    <a class="text-white"><small class="text-white mx-2">[[${username}]]님</small></a><br>
+                <!-- 사용자 이름 표시 -->
+                <div id="user-name" style="display: none;">
+                    <a class="text-white"><small class="text-white mx-2" id="username-display"></small></a><br>
                 </div>
             </div>
         </div>
