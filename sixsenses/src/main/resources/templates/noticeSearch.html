@@ -33,7 +33,26 @@
   <link href="/css/style.css" rel="stylesheet">
 </head>
 <body>
-
+<script>
+  // 토근 header로 옮기는 스크립트
+  var token = sessionStorage.getItem(("token"))
+  fetch("/users/getUser",{
+    method:'GET',
+    headers:{
+      AUTHORIZATION:'Bearer ' + token
+    },
+    redirect: "follow"
+  }).then(res =>{
+    console.log(res);
+    return res.json()
+  }).then(body => {
+    console.log(body.username);
+    console.log(body.auth);
+    document.getElementById("username-p").innerText = body.username
+  }).catch(err => {
+    console.log(err);
+  })
+</script>
 <!--기존 헤더-->
 <!--
 <header class="fixed inset-x-0 top-0 z-50 left-0 bg-black text-white body-font border-b border-gray-200">
